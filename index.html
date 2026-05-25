@@ -6,14 +6,14 @@
     <title>Galvanic Cell Simulator</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Electron flow animations */
+        /* Animaciones para los electrones */
         @keyframes flowRight {
             from { stroke-dashoffset: 24; }
             to { stroke-dashoffset: 0; }
         }
         @keyframes flowLeft {
             from { stroke-dashoffset: 0; }
-            to { stroke-dashoffset: -24; }
+            to { stroke-dashoffset: 24; }
         }
         .electron-flow-right {
             stroke-dasharray: 12;
@@ -24,7 +24,7 @@
             animation: flowLeft 0.8s linear infinite;
         }
 
-        /* Reaction arrow animations */
+        /* Animaciones para flechas de reacción */
         @keyframes flowDashes {
             to { stroke-dashoffset: -16; }
         }
@@ -39,7 +39,7 @@
             stroke: #3b82f6;
         }
 
-        /* General transition styles */
+        /* Estilos generales de transición */
         .fade-in {
             animation: fadeIn 0.5s ease-in forwards;
         }
@@ -47,7 +47,7 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .license-block { 
+        .licencia-bloque { 
             flex-basis: 100%; 
             margin-top: 25px; 
             background: #f1f5f9; 
@@ -61,8 +61,8 @@
             font-family: sans-serif;
             clear: both; 
         }
-        .license-block a { color: #2563eb; text-decoration: none; font-weight: bold; }
-        .license-block a:hover { text-decoration: underline; }
+        .licencia-bloque a { color: #2563eb; text-decoration: none; font-weight: bold; }
+        .licencia-bloque a:hover { text-decoration: underline; }
         .badge-container { 
             margin-bottom: 8px; 
             display: flex;          
@@ -77,42 +77,42 @@
 </head>
 <body class="bg-slate-200 min-h-screen font-sans text-slate-800 p-2 md:p-4 flex justify-center items-start">
 
-    <!-- Main Container -->
+    <!-- Contenedor Principal Ajustado a la nueva distribución -->
     <div class="max-w-7xl w-full bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col">
         
-        <!-- Header -->
+        <!-- Cabecera Común (Espaciado Reducido) -->
         <div class="bg-blue-800 text-white py-3 px-4 text-center">
             <h1 class="text-2xl font-bold">Galvanic Cells</h1>
         </div>
 
-        <!-- Divided Layout -->
+        <!-- Layout Dividido (1/3 Izquierda, 2/3 Derecha) -->
         <div class="flex flex-col lg:flex-row w-full">
             
-            <!-- LEFT BLOCK (1/3) -->
+            <!-- BLOQUE IZQUIERDO (1/3) con espacios reducidos -->
             <div class="w-full lg:w-1/3 bg-slate-50 p-4 border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col gap-4">
                 
-                <!-- Generate Cell Button -->
+                <!-- Botón Generar Pila -->
                 <button onclick="generateRandomCell()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow transition-colors flex justify-center items-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                     Generate New Cell
                 </button>
 
-                <!-- Reduction Potentials -->
+                <!-- Potenciales de Reducción -->
                 <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-200">
                     <h3 class="font-bold text-slate-700 mb-2 border-b border-slate-100 pb-1 flex items-center gap-2 text-sm">
                         <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         Reduction Potentials
                     </h3>
                     <div id="potentials-banner" class="flex flex-col gap-1 font-mono text-sm">
-                        <!-- Filled by JS -->
+                        <!-- Se rellena por JS -->
                     </div>
                 </div>
 
-                <!-- Steps Panel -->
+                <!-- Panel de Pasos -->
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col flex-grow">
                     <h2 id="step-title" class="text-lg font-bold text-blue-800 mb-2 border-b border-blue-100 pb-1">Step 0: Initial Setup</h2>
                     <p id="step-description" class="text-slate-600 flex-grow text-left leading-relaxed mb-4 text-sm">
-                        <!-- Description updated here -->
+                        <!-- El texto se actualizará aquí -->
                     </p>
                     <div class="flex flex-col gap-2 mt-auto">
                         <button id="btn-next" onclick="nextStep()" class="w-full py-2.5 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg shadow-md transition-transform transform hover:scale-[1.02] flex justify-center items-center gap-2 text-sm">
@@ -126,51 +126,51 @@
                 </div>
             </div>
 
-            <!-- RIGHT BLOCK (2/3) -->
+            <!-- BLOQUE DERECHO (2/3) -->
             <div class="w-full lg:w-2/3 p-4 flex flex-col justify-between gap-2 bg-white relative">
                 
-                <!-- Visual Simulation Area (SVG) -->
+                <!-- Área de Simulación Visual (SVG) -->
                 <div class="w-full flex justify-center pb-0">
                     <div id="svg-container" class="relative w-full max-w-[800px] aspect-[2/1]">
-                        <!-- Dynamic SVG goes here -->
+                        <!-- El SVG se genera dinámicamente aquí -->
                     </div>
                 </div>
 
-                <!-- Half-reaction Panel -->
+                <!-- Panel de Semirreacciones PEGADO debajo de cada semielemento -->
                 <div class="grid grid-cols-2 gap-2 lg:gap-4 w-full max-w-[800px] mx-auto mt-[-10px] z-10 relative">
-                    <!-- Left Half-reaction -->
+                    <!-- Semirreacción Izquierda -->
                     <div id="reaction-left" class="bg-blue-50 p-2 lg:p-3 rounded-lg border border-blue-100 opacity-0 transition-opacity duration-500 flex flex-col justify-center items-center text-center">
                         <h3 id="title-left" class="font-bold text-blue-800 mb-1 text-xs uppercase tracking-wider flex items-center justify-center">Left Beaker</h3>
                         <div id="equation-left" class="text-sm lg:text-base font-mono"></div>
                     </div>
 
-                    <!-- Right Half-reaction -->
+                    <!-- Semirreacción Derecha -->
                     <div id="reaction-right" class="bg-blue-50 p-2 lg:p-3 rounded-lg border border-blue-100 opacity-0 transition-opacity duration-500 flex flex-col justify-center items-center text-center">
                         <h3 id="title-right" class="font-bold text-blue-800 mb-1 text-xs uppercase tracking-wider flex items-center justify-center">Right Beaker</h3>
                         <div id="equation-right" class="text-sm lg:text-base font-mono"></div>
                     </div>
                 </div>
 
-                <!-- Global Reaction and Potential Panel -->
+                <!-- Panel de Reacción Global y Potencial -->
                 <div id="global-panel" class="bg-slate-800 text-white p-3 lg:p-4 rounded-xl shadow-inner hidden mt-2 fade-in">
-                    <h3 class="font-bold text-lg mb-2 text-center text-green-400">Global Cell Analysis</h3>
+                    <h3 class="font-bold text-lg mb-2 text-center text-green-400">Overall Cell Analysis</h3>
                     
                     <div class="flex flex-col gap-2 font-mono">
-                        <!-- Step 5: Equation -->
+                        <!-- Paso 5: Ecuación -->
                         <div id="equation-panel" class="bg-slate-700 py-2 px-3 rounded-lg text-center flex flex-col justify-center border border-slate-600">
-                            <p class="text-slate-200 text-base lg:text-lg font-semibold mb-1 font-sans">Global ionic equation (balanced)</p>
+                            <p class="text-slate-200 text-base lg:text-lg font-semibold mb-1 font-sans">Overall ionic equation (balanced)</p>
                             <div id="global-equation" class="font-bold text-yellow-300 text-base lg:text-xl"></div>
                         </div>
 
-                        <!-- Step 6: EMF -->
+                        <!-- Paso 6: FEM -->
                         <div id="fem-panel" class="bg-slate-700 py-2 px-3 rounded-lg text-center hidden flex-col justify-center fade-in border border-slate-600">
                             <p class="text-slate-200 text-base lg:text-lg font-semibold mb-1 font-sans">Electromotive Force (EMF)</p>
                             <div id="voltage-calculation" class="text-sm lg:text-base"></div>
                         </div>
                         
-                        <!-- Step 7: SYMBOLIC NOTATION -->
+                        <!-- Paso 7: REPRESENTACIÓN SIMBÓLICA -->
                         <div id="symbolic-panel" class="bg-slate-700 py-2 px-3 rounded-lg text-center hidden flex-col justify-center fade-in border border-cyan-600">
-                            <p class="text-slate-200 text-base lg:text-lg font-semibold mb-1 font-sans">Cell Diagram Notation</p>
+                            <p class="text-slate-200 text-base lg:text-lg font-semibold mb-1 font-sans">Cell Notation</p>
                             <div id="cell-notation" class="font-bold text-cyan-300 text-sm lg:text-lg overflow-x-auto whitespace-nowrap"></div>
                         </div>
                     </div>
@@ -178,20 +178,20 @@
 
             </div>
         </div>
-        <div class="license-block">
+        <div class="licencia-bloque">
             <div class="badge-container">
-                <img src="https://visitor-badge.laobi.icu/badge?page_id=EAG1964.phychem.lab&left_text=Visits&left_color=gray&right_color=blue" alt="Visits">
+                <img src="https://visitor-badge.laobi.icu/badge?page_id=EAG1964.phychem.lab&left_text=Views&left_color=gray&right_color=blue" alt="Views">
             </div>
             <p style="margin: 0;">
                 Author: <strong>EAG1964</strong> | 2026 | 
-                <a href="https://EAG1964.github.io/">Main Dashboard</a> | 
+                <a href="https://EAG1964.github.io/">Main Panel</a> | 
                 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank">CC BY-NC-SA 4.0 License</a>
             </p>
         </div>
     </div>
 
     <script>
-        // --- CHEMICAL DATA ---
+        // --- DATOS QUÍMICOS ---
         const REDOX_PAIRS = [
             { id: 'Li', ox: 'Li<sup>+</sup>', red: 'Li', e0: -3.04, e: 1, color: '#9CA3AF', type: 'solid' },
             { id: 'Na', ox: 'Na<sup>+</sup>', red: 'Na', e0: -2.71, e: 1, color: '#D1D5DB', type: 'solid' },
@@ -271,7 +271,7 @@
             }
         ];
 
-        // Autocomplete reactants/products for simple pairs
+        // Autocompletar la estructura de reactivos/productos para elementos simples
         REDOX_PAIRS.forEach(p => {
             if(!p.complex) {
                 p.red_reactants = [{c: 1, s: p.ox}];
@@ -281,9 +281,11 @@
             }
         });
 
+        // Matemáticas para ajuste estequiométrico
         const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
         const lcm = (a, b) => (a * b) / gcd(a, b);
 
+        // Sales para el puente salino
         const SALT_BRIDGES = [
             { name: 'KNO₃', cation: 'K⁺', anion: 'NO₃⁻' },
             { name: 'KCl', cation: 'K⁺', anion: 'Cl⁻' },
@@ -292,7 +294,7 @@
             { name: 'NH₄NO₃', cation: 'NH₄⁺', anion: 'NO₃⁻' }
         ];
 
-        // Cell Notation Helper
+        // Función Helper para generar la Notación Simbólica
         function getCellNotation(el, isAnode) {
             const pt = 'Pt(s)';
             const aq = '(aq, 1 M)';
@@ -329,7 +331,11 @@
                 if (isAnode) return `${pt} | ${el.red}${aq}, ${el.ox}${aq}`;
                 else return `${el.ox}${aq}, ${el.red}${aq} | ${pt}`;
             }
-            if (el.id === 'Cr2O7/Cr3+' || el.id === 'MnO4-/Mn2+') {
+            if (el.id === 'Cr2O7/Cr3+') {
+                if (isAnode) return `${pt} | ${el.red}${aq}, ${el.ox}${aq}, H<sup>+</sup>${aq}`;
+                else return `${el.ox}${aq}, H<sup>+</sup>${aq}, ${el.red}${aq} | ${pt}`;
+            }
+            if (el.id === 'MnO4-/Mn2+') {
                 if (isAnode) return `${pt} | ${el.red}${aq}, ${el.ox}${aq}, H<sup>+</sup>${aq}`;
                 else return `${el.ox}${aq}, H<sup>+</sup>${aq}, ${el.red}${aq} | ${pt}`;
             }
@@ -344,22 +350,23 @@
             return '';
         }
 
-        // Global State
+        // Estado Global
         let currentCell = null;
         let step = 0;
         const MAX_STEPS = 7;
 
         const STEPS_INFO = [
-            { title: "Step 0: Initial Setup", btnText: "Step 1: Identify Anode and Cathode", desc: "Observe the reduction potentials. The electrode with the lower reduction potential will tend to oxidize (Anode), and the one with the higher potential will tend to reduce (Cathode)." },
+            { title: "Step 0: Initial Setup", btnText: "Step 1: Identify Anode and Cathode", desc: "Observe the reduction potentials. The electrode with the lower reduction potential will tend to oxidize (Anode) and the one with the higher potential will tend to reduce (Cathode)." },
             { title: "Step 1: Identify Anode and Cathode", btnText: "Step 2: External Circuit (Electrons)", desc: "The Anode (-) is where oxidation occurs (lower E&deg;). The Cathode (+) is where reduction occurs (higher E&deg;)." },
-            { title: "Step 2: External Circuit (Electrons)", btnText: "Step 3: Salt Bridge", desc: "Electrons (e⁻) travel spontaneously from the anode (negative terminal) to the cathode (positive terminal) through the external wire." },
-            { title: "Step 3: Salt Bridge", btnText: "Step 4: Half-reactions", desc: "(Ionic Balance) To maintain electrical neutrality, anions travel toward the anode and cations travel toward the cathode." },
-            { title: "Step 4: Half-reactions", btnText: "Step 5: Balanced Global Reaction", desc: "Set up the oxidation (anode) and reduction (cathode) half-reactions. Note how the anode reaction is reversed compared to the standard table." },
-            { title: "Step 5: Balanced Global Reaction", btnText: "Step 6: EMF Calculation", desc: "Multiply the half-reactions to equalize the number of electrons exchanged. If H⁺ or H₂O appear on both sides, simplify them." },
-            { title: "Step 6: EMF Calculation", btnText: "Step 7: Symbolic Notation", desc: "Calculate the cell potential using: E&deg;<sub>cell</sub> = E&deg;(cathode) - E&deg;(anode). It must be positive for spontaneity!" },
-            { title: "Step 7: Symbolic Notation", btnText: "Completed", desc: "The cell diagram summarizes the configuration. The anode (oxidation) is on the left and the cathode (reduction) on the right, separated by '||' (salt bridge)." }
+            { title: "Step 2: External Circuit (Electrons)", btnText: "Step 3: Salt Bridge", desc: "Electrons (e⁻) travel spontaneously from the anode (negative pole) to the cathode (positive pole) through the external wire." },
+            { title: "Step 3: Salt Bridge", btnText: "Step 4: Half-Reactions", desc: "(Ionic Equilibrium) To maintain electrical neutrality, anions travel toward the anode and cations toward the cathode." },
+            { title: "Step 4: Half-Reactions", btnText: "Step 5: Balance Overall Reaction", desc: "The oxidation (anode) and reduction (cathode) half-reactions are set up. Notice how the anode reaction is reversed compared to the table." },
+            { title: "Step 5: Balance Overall Reaction", btnText: "Step 6: Calculate Cell EMF", desc: "We multiply the half-reactions to equalize the number of electrons exchanged. If there are H⁺ or H₂O on both sides, they are simplified." },
+            { title: "Step 6: Calculate Cell EMF", btnText: "Step 7: Cell Notation", desc: "We calculate the cell potential using: E&deg;<sub>cell</sub> = E&deg;(cathode) - E&deg;(anode). It must be positive to be spontaneous!" },
+            { title: "Step 7: Cell Notation", btnText: "Completed", desc: "The cell notation summarizes the configuration. The anode (oxidation) goes on the left and the cathode (reduction) on the right, separated by '||' (salt bridge). Different phases are separated with '|' and same phases with ','." }
         ];
 
+        // Inicialización
         function init() {
             generateRandomCell();
         }
@@ -378,6 +385,7 @@
             if (p1.e0 < p2.e0) { anode = p1; cathode = p2; } 
             else { anode = p2; cathode = p1; }
 
+            // Asignar aleatoriamente izquierda/derecha
             const isAnodeLeft = Math.random() > 0.5;
             const saltBridge = SALT_BRIDGES[Math.floor(Math.random() * SALT_BRIDGES.length)];
             
@@ -410,20 +418,23 @@
         }
 
         function updateUI() {
+            // Actualizar Potenciales
             const fmtE0 = (val) => val > 0 ? `+${val}` : val;
             document.getElementById('potentials-banner').innerHTML = `
                 <div class="py-1 border-b border-slate-100">E&deg;(${currentCell.left.ox}/${currentCell.left.red}) = <span class="font-bold text-blue-700">${fmtE0(currentCell.left.e0)} V</span></div>
                 <div class="py-1">E&deg;(${currentCell.right.ox}/${currentCell.right.red}) = <span class="font-bold text-blue-700">${fmtE0(currentCell.right.e0)} V</span></div>
             `;
 
+            // Textos del paso
             document.getElementById('step-title').textContent = STEPS_INFO[step].title;
             
             let desc = STEPS_INFO[step].desc;
             if (step === 3 && currentCell) {
-                desc = `(Ionic Balance) To maintain electrical neutrality, anions (${currentCell.saltBridge.anion}) travel toward the anode and cations (${currentCell.saltBridge.cation}) toward the cathode.`;
+                desc = `(Ionic Equilibrium) To maintain electrical neutrality, anions (${currentCell.saltBridge.anion}) travel toward the anode and cations (${currentCell.saltBridge.cation}) toward the cathode.`;
             }
             document.getElementById('step-description').innerHTML = desc;
 
+            // Botones
             const btnNext = document.getElementById('btn-next');
             const btnReset = document.getElementById('btn-reset');
             
@@ -437,7 +448,10 @@
                 if (step > 0) btnReset.classList.remove('hidden');
             }
 
+            // Actualizar Paneles de Reacciones
             updateReactionsPanel();
+            
+            // Dibujar SVG
             renderSVG();
         }
 
@@ -455,11 +469,12 @@
             const titleLeft = document.getElementById('title-left');
             const titleRight = document.getElementById('title-right');
 
+            // --- Lógica del Tooltip de Aviso (Metales Alcalinos) ---
             const getWarningIcon = (metalId) => `
                 <span class="group relative inline-flex items-center cursor-help ml-1 text-amber-500 hover:text-amber-600 transition-colors">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     <span class="hidden group-hover:block absolute bottom-full left-1/2 -translate-x-1/2 mb-1 w-56 p-2 bg-slate-800 text-white text-xs rounded shadow-lg z-[100] normal-case tracking-normal font-normal text-left leading-relaxed">
-                        <strong class="text-amber-400 block mb-1">Theoretical Alert!</strong>
+                        <strong class="text-amber-400 block mb-1">Theoretical Warning!</strong>
                         The metal <strong>${metalId}</strong> would react explosively with water. In a real lab, this cell requires non-aqueous electrolytes.
                         <svg class="absolute text-slate-800 h-2 w-full left-0 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
                     </span>
@@ -471,7 +486,8 @@
 
             titleLeft.innerHTML = `Left Beaker ${hasWarningLeft ? getWarningIcon(currentCell.left.id) : ''}`;
             titleRight.innerHTML = `Right Beaker ${hasWarningRight ? getWarningIcon(currentCell.right.id) : ''}`;
-
+            // -------------------------------------------------------
+            
             if (step >= 4) {
                 leftPanel.style.opacity = '1';
                 rightPanel.style.opacity = '1';
@@ -489,11 +505,11 @@
                     const eTotal = (step >= 5) ? element.e * mult : element.e;
                     
                     let rxn = '';
-                    if (isAnode) { // Oxidation
+                    if (isAnode) { // Oxidación
                         const reacts = formatSide(element.ox_reactants, m);
                         const prods = formatSide(element.ox_products, m);
                         rxn = `<span class="text-red-600 font-bold block mb-1">Oxidation (Anode):</span> ${reacts} &rarr; ${prods} + ${eTotal}e<sup>&minus;</sup>`;
-                    } else { // Reduction
+                    } else { // Reducción
                         const reacts = formatSide(element.red_reactants, m);
                         const prods = formatSide(element.red_products, m);
                         rxn = `<span class="text-blue-600 font-bold block mb-1">Reduction (Cathode):</span> ${reacts} + ${eTotal}e<sup>&minus;</sup> &rarr; ${prods}`;
@@ -512,6 +528,7 @@
                 globalPanel.classList.remove('hidden');
                 globalPanel.classList.add('fade-in');
                 
+                // Mapear especies químicas para cancelarlas correctamente (ej: H+ y H2O en ambos lados)
                 const getSide = (parts, mult) => parts.map(p => ({ s: p.s, c: p.c * mult }));
                 
                 const anodeR = getSide(currentCell.anode.ox_reactants, currentCell.anodeMult);
@@ -525,6 +542,7 @@
                 [...anodeR, ...cathodeR].forEach(p => reactsMap.set(p.s, (reactsMap.get(p.s) || 0) + p.c));
                 [...anodeP, ...cathodeP].forEach(p => prodsMap.set(p.s, (prodsMap.get(p.s) || 0) + p.c));
 
+                // Lógica de simplificación química
                 for (let [s, c] of reactsMap.entries()) {
                     if (prodsMap.has(s)) {
                         let cProd = prodsMap.get(s);
@@ -542,6 +560,7 @@
                 }
 
                 const formatMap = (map) => Array.from(map.entries()).map(([s, c]) => `${c === 1 ? '' : c}${s}`).join(' + ');
+                
                 globalEq.innerHTML = `${formatMap(reactsMap)} &rarr; ${formatMap(prodsMap)}`;
             } else {
                 globalPanel.classList.add('hidden');
@@ -550,6 +569,7 @@
             if (step >= 6) {
                 femPanel.classList.remove('hidden');
                 femPanel.classList.add('flex');
+                
                 const fmt = (v) => v > 0 ? `+${v}` : v;
                 voltCalc.innerHTML = `
                     <div class="flex flex-wrap justify-center items-center gap-2 lg:gap-4 text-base lg:text-xl text-slate-200 mt-2">
@@ -568,8 +588,10 @@
             if (step >= 7) {
                 symbolicPanel.classList.remove('hidden');
                 symbolicPanel.classList.add('flex');
+                
                 const anodeNotation = getCellNotation(currentCell.anode, true);
                 const cathodeNotation = getCellNotation(currentCell.cathode, false);
+                
                 cellNotation.innerHTML = `${anodeNotation} <span class="text-white px-2">||</span> ${cathodeNotation}`;
             } else {
                 symbolicPanel.classList.add('hidden');
@@ -580,41 +602,55 @@
         function renderSVG() {
             const { left, right, isAnodeLeft, eCell } = currentCell;
 
+            // Variables de dibujo
             const voltmeterReading = step >= 2 ? `+${eCell} V` : `0.00 V`;
             const vColor = step >= 2 ? '#22c55e' : '#94a3b8';
+
+            // Animaciones
             const electronClass = isAnodeLeft ? 'electron-flow-right' : 'electron-flow-left';
 
+            // Helper para texto en la solución de acuosos
             const renderSolutionText = (element, cx) => {
                 const fmtIon = (ion) => ion.replace(/<sup>/g, '<tspan dy="-10" font-size="14">').replace(/<\/sup>/g, '</tspan><tspan dy="10">').replace(/<sub>/g, '<tspan dy="10" font-size="14">').replace(/<\/sub>/g, '</tspan><tspan dy="-10">');
 
                 let html = '';
                 if (element.type === 'aqueous') {
+                    // Iones separados a la izquierda y derecha del electrodo de Pt
                     html += `
                         <text x="${cx - 45}" y="280" text-anchor="middle" font-size="18" font-weight="bold" fill="#0f172a">${fmtIon(element.ox)}</text>
                         <text x="${cx + 45}" y="280" text-anchor="middle" font-size="18" font-weight="bold" fill="#0f172a">${fmtIon(element.red)}</text>
                     `;
                 } else if (element.type === 'gas') {
+                    // Identificamos cuál de las dos especies es el ion (tiene <sup>) para dibujarlo en el líquido
                     const ion = element.ox.includes('<sup') ? element.ox : element.red;
-                    html += `<text x="${cx}" y="280" text-anchor="middle" font-size="20" font-weight="bold" fill="#0f172a">${fmtIon(ion)}</text>`;
+                    html += `
+                        <text x="${cx}" y="280" text-anchor="middle" font-size="20" font-weight="bold" fill="#0f172a">${fmtIon(ion)}</text>
+                    `;
                 } else {
-                    html += `<text x="${cx}" y="280" text-anchor="middle" font-size="20" font-weight="bold" fill="#0f172a">${fmtIon(element.ox)}</text>`;
+                    html += `
+                        <text x="${cx}" y="280" text-anchor="middle" font-size="20" font-weight="bold" fill="#0f172a">${fmtIon(element.ox)}</text>
+                    `;
                 }
 
                 if (element.needsAcid) {
-                    const hColor = '#e11d48';
+                    const hColor = '#e11d48'; // Color rojo/rosado para diferenciarlos
                     html += `
+                        <!-- Iones H+ del medio ácido -->
                         <text x="${cx - 35}" y="235" text-anchor="middle" font-size="13" font-weight="bold" fill="${hColor}">H<tspan dy="-6" font-size="10">+</tspan></text>
                         <text x="${cx + 40}" y="245" text-anchor="middle" font-size="13" font-weight="bold" fill="${hColor}">H<tspan dy="-6" font-size="10">+</tspan></text>
                         <text x="${cx - 20}" y="310" text-anchor="middle" font-size="13" font-weight="bold" fill="${hColor}">H<tspan dy="-6" font-size="10">+</tspan></text>
+                        <text x="${cx + 25}" y="315" text-anchor="middle" font-size="13" font-weight="bold" fill="${hColor}">H<tspan dy="-6" font-size="10">+</tspan></text>
                     `;
                 }
 
                 if (element.needsBase) {
-                    const ohColor = '#7e22ce';
+                    const ohColor = '#7e22ce'; // Color púrpura para OH-
                     html += `
+                        <!-- Iones OH- del medio básico -->
                         <text x="${cx - 35}" y="235" text-anchor="middle" font-size="13" font-weight="bold" fill="${ohColor}">OH<tspan dy="-6" font-size="10">-</tspan></text>
                         <text x="${cx + 40}" y="245" text-anchor="middle" font-size="13" font-weight="bold" fill="${ohColor}">OH<tspan dy="-6" font-size="10">-</tspan></text>
                         <text x="${cx - 20}" y="310" text-anchor="middle" font-size="13" font-weight="bold" fill="${ohColor}">OH<tspan dy="-6" font-size="10">-</tspan></text>
+                        <text x="${cx + 25}" y="315" text-anchor="middle" font-size="13" font-weight="bold" fill="${ohColor}">OH<tspan dy="-6" font-size="10">-</tspan></text>
                     `;
                 }
 
@@ -624,6 +660,7 @@
             const getLiquidColor = (element) => element.type === 'aqueous' ? element.color : '#bae6fd';
             const getLiquidOpacity = (element) => element.type === 'aqueous' ? '0.35' : '0.5';
 
+            // Dibujo de electrodos
             const renderElectrode = (element, cx, isLeftCell) => {
                 if (element.type === 'gas') {
                     const dSign = isLeftCell ? -1 : 1;
@@ -639,24 +676,46 @@
                         : `M ${cx - 22} 130 A 22 22 0 0 1 ${cx + 22} 130 L ${cx + 22} ${tubeTopY} L ${tubeOuterX} ${tubeTopY} L ${tubeOuterX} ${tubeBotY} L ${cx + 22} ${tubeBotY} L ${cx + 22} 240 L ${cx - 22} 240 Z`;
 
                     return `
+                        <!-- Cúpula y pared recta opuesta a la entrada lateral -->
                         <path d="M ${cx - 22} 130 A 22 22 0 0 1 ${cx + 22} 130" stroke="#94a3b8" stroke-width="3" fill="none" />
                         <path d="M ${oppWallX} 130 L ${oppWallX} 240" stroke="#94a3b8" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        
+                        <!-- Pared con el agujero lateral (tubo recto horizontal y más estrecho) -->
                         <path d="M ${wallX} 130 L ${wallX} ${tubeTopY} L ${tubeOuterX} ${tubeTopY}" stroke="#94a3b8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M ${tubeOuterX} ${tubeBotY} L ${wallX} ${tubeBotY} L ${wallX} 240" stroke="#94a3b8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- Relleno semitransparente del tubo -->
                         <path d="${fillPath}" fill="rgba(255,255,255,0.4)" stroke="none" />
+                        
+                        <!-- Hilo de Platino (Pt) y placa (plateado) -->
                         <line x1="${cx}" y1="115" x2="${cx}" y2="210" stroke="#64748b" stroke-width="3" />
                         <rect x="${cx-10}" y="210" width="20" height="20" fill="#cbd5e1" stroke="#64748b" stroke-width="1.5" rx="2" />
                         <text x="${cx + 14}" y="180" text-anchor="middle" font-size="13" fill="#475569" font-weight="bold">Pt</text>
+                        
+                        <!-- Entrada de gas lateral: Etiqueta y Flecha apuntando adentro -->
                         <text x="${tubeOuterX + dSign * 25}" y="${tubeMidY - 10}" font-size="20" font-weight="bold" fill="#64748b" text-anchor="middle">${element.gasLabel}</text>
                         <path d="M ${tubeOuterX + dSign * 45} ${tubeMidY} L ${tubeOuterX + dSign * 5} ${tubeMidY}" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowGray)"/>
+
+                        <!-- Burbujas animadas de gas entrando por el lateral, bajando y saliendo a la disolución -->
                         <g>
                             <circle r="3" fill="${element.color}" />
                             <animateMotion dur="3.5s" begin="0s" repeatCount="indefinite" path="M ${tubeOuterX + dSign * 15} ${tubeMidY} L ${cx} ${tubeMidY} L ${cx} 235 C ${cx + 15} 250, ${cx + 35} 240, ${cx + 35} 140" />
                             <animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.05;0.8;0.9;1" dur="3.5s" begin="0s" repeatCount="indefinite" />
                         </g>
+                        <g>
+                            <circle r="2" fill="${element.color}" />
+                            <animateMotion dur="3s" begin="1s" repeatCount="indefinite" path="M ${tubeOuterX + dSign * 15} ${tubeMidY} L ${cx} ${tubeMidY} L ${cx} 230 C ${cx - 15} 245, ${cx - 35} 235, ${cx - 35} 130" />
+                            <animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.05;0.8;0.9;1" dur="3s" begin="1s" repeatCount="indefinite" />
+                        </g>
+                        <g>
+                            <circle r="2.5" fill="${element.color}" />
+                            <animateMotion dur="3.2s" begin="2s" repeatCount="indefinite" path="M ${tubeOuterX + dSign * 15} ${tubeMidY} L ${cx} ${tubeMidY} L ${cx} 238 C ${cx + 10} 255, ${cx + 28} 245, ${cx + 28} 120" />
+                            <animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.05;0.8;0.9;1" dur="3.2s" begin="2s" repeatCount="indefinite" />
+                        </g>
                     `;
                 } else if (element.type === 'aqueous') {
                     return `
+                        <!-- Hilo de Platino (Pt) y placa para disolución (plateado) -->
                         <line x1="${cx}" y1="115" x2="${cx}" y2="230" stroke="#64748b" stroke-width="4" />
                         <rect x="${cx-15}" y="230" width="30" height="40" fill="#cbd5e1" stroke="#64748b" stroke-width="2" rx="2" />
                         <text x="${cx + 14}" y="200" text-anchor="middle" font-size="14" fill="#475569" font-weight="bold">Pt</text>
@@ -683,70 +742,106 @@
                         </marker>
                     </defs>
 
+                    <!-- FONDOS Y MESAS -->
                     <line x1="50" y1="320" x2="750" y2="320" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
 
+                    <!-- CABLES -->
                     <path d="M 200 120 L 200 30 L 340 30" fill="none" stroke="#1e293b" stroke-width="4"/>
                     <path d="M 600 120 L 600 30 L 460 30" fill="none" stroke="#1e293b" stroke-width="4"/>
                     
+                    <!-- FLUJO DE ELECTRONES (Paso 2+) -->
                     ${step >= 2 ? `
                         <path d="M 200 120 L 200 30 L 600 30 L 600 120" fill="none" stroke="#fbbf24" stroke-width="4" class="${electronClass}" />
                         <text x="270" y="20" text-anchor="middle" fill="#d97706" font-weight="bold" font-size="16">${isAnodeLeft ? 'e⁻ &rarr;' : '&larr; e⁻'}</text>
                         <text x="530" y="20" text-anchor="middle" fill="#d97706" font-weight="bold" font-size="16">${isAnodeLeft ? 'e⁻ &rarr;' : '&larr; e⁻'}</text>
                     ` : ''}
 
+                    <!-- VOLTÍMETRO -->
                     <rect x="340" y="5" width="120" height="50" rx="10" fill="#f8fafc" stroke="#475569" stroke-width="3" />
                     <text x="400" y="27" text-anchor="middle" font-family="monospace" font-size="18" font-weight="bold" fill="${vColor}">${voltmeterReading}</text>
                     <text x="400" y="45" text-anchor="middle" font-size="12" fill="#64748b">Voltmeter</text>
 
+                    <!-- PUENTE SALINO -->
+                    <!-- Tubo principal -->
                     <path d="M 280 200 L 280 140 A 50 50 0 0 1 330 90 L 470 90 A 50 50 0 0 1 520 140 L 520 200" fill="none" stroke="#f1f5f9" stroke-width="36" opacity="0.9"/>
                     <path d="M 280 200 L 280 140 A 50 50 0 0 1 330 90 L 470 90 A 50 50 0 0 1 520 140 L 520 200" fill="none" stroke="#cbd5e1" stroke-width="40" stroke-linecap="round" opacity="0.5"/>
                     <text x="400" y="135" text-anchor="middle" font-size="18" font-weight="bold" fill="#475569">Salt Bridge (${currentCell.saltBridge.name})</text>
 
+                    <!-- Animación Iones (Paso 3+) -->
                     ${step >= 3 ? `
+                        <!-- Leyenda Iones bajo el puente salino -->
                         <g>
                             <circle cx="360" cy="165" r="14" fill="#ef4444" opacity="0.9"/>
                             <text x="360" y="169" text-anchor="middle" font-size="10" font-weight="bold" fill="white">${currentCell.saltBridge.cation}</text>
+                            
                             <circle cx="440" cy="165" r="14" fill="#3b82f6" opacity="0.9"/>
                             <text x="440" y="169" text-anchor="middle" font-size="10" font-weight="bold" fill="white">${currentCell.saltBridge.anion}</text>
                         </g>
 
+                        <!-- Cationes en movimiento (Rojos) -->
                         <g>
                             <circle r="10" fill="#ef4444" />
                             <text y="4" text-anchor="middle" font-size="12" font-weight="bold" fill="white">+</text>
                             <animateMotion dur="3s" repeatCount="indefinite" path="${isAnodeLeft ? 'M 400 90 L 470 90 A 50 50 0 0 1 520 140 L 520 190' : 'M 400 90 L 330 90 A 50 50 0 0 0 280 140 L 280 190'}" />
                             <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="3s" repeatCount="indefinite" />
                         </g>
+                        <g>
+                            <circle r="10" fill="#ef4444" />
+                            <text y="4" text-anchor="middle" font-size="12" font-weight="bold" fill="white">+</text>
+                            <animateMotion dur="3s" begin="1.5s" repeatCount="indefinite" path="${isAnodeLeft ? 'M 400 90 L 470 90 A 50 50 0 0 1 520 140 L 520 190' : 'M 400 90 L 330 90 A 50 50 0 0 0 280 140 L 280 190'}" />
+                            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="3s" begin="1.5s" repeatCount="indefinite" />
+                        </g>
 
+                        <!-- Aniones NO3- (Azules) -->
                         <g>
                             <circle r="10" fill="#3b82f6" />
                             <text y="4" text-anchor="middle" font-size="12" font-weight="bold" fill="white">-</text>
                             <animateMotion dur="3s" repeatCount="indefinite" path="${isAnodeLeft ? 'M 400 90 L 330 90 A 50 50 0 0 0 280 140 L 280 190' : 'M 400 90 L 470 90 A 50 50 0 0 1 520 140 L 520 190'}" />
                             <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="3s" repeatCount="indefinite" />
                         </g>
+                        <g>
+                            <circle r="10" fill="#3b82f6" />
+                            <text y="4" text-anchor="middle" font-size="12" font-weight="bold" fill="white">-</text>
+                            <animateMotion dur="3s" begin="1.5s" repeatCount="indefinite" path="${isAnodeLeft ? 'M 400 90 L 330 90 A 50 50 0 0 0 280 140 L 280 190' : 'M 400 90 L 470 90 A 50 50 0 0 1 520 140 L 520 190'}" />
+                            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="3s" begin="1.5s" repeatCount="indefinite" />
+                        </g>
                     ` : ''}
 
+                    <!-- TAPONES PUENTE SALINO -->
                     <path d="M 265 200 L 295 200" stroke="#94a3b8" stroke-width="10" opacity="0.8"/>
                     <path d="M 505 200 L 535 200" stroke="#94a3b8" stroke-width="10" opacity="0.8"/>
 
+                    <!-- CUBETA IZQUIERDA -->
                     <path d="M 100 180 L 100 310 A 10 10 0 0 0 110 320 L 290 320 A 10 10 0 0 0 300 310 L 300 180" fill="rgba(186, 230, 253, 0.3)" stroke="#0284c7" stroke-width="4"/>
+                    <!-- Líquido -->
                     <path d="M 102 200 L 298 200 L 298 310 A 8 8 0 0 1 290 318 L 110 318 A 8 8 0 0 1 102 310 Z" fill="${getLiquidColor(left)}" opacity="${getLiquidOpacity(left)}"/>
                     ${renderSolutionText(left, 200)}
+                    
+                    <!-- ELECTRODO IZQUIERDO -->
                     ${renderElectrode(left, 200, true)}
 
+                    <!-- CUBETA DERECHA -->
                     <path d="M 500 180 L 500 310 A 10 10 0 0 0 510 320 L 690 320 A 10 10 0 0 0 700 310 L 700 180" fill="rgba(186, 230, 253, 0.3)" stroke="#0284c7" stroke-width="4"/>
+                    <!-- Líquido -->
                     <path d="M 502 200 L 698 200 L 698 310 A 8 8 0 0 1 690 318 L 510 318 A 8 8 0 0 1 502 310 Z" fill="${getLiquidColor(right)}" opacity="${getLiquidOpacity(right)}"/>
                     ${renderSolutionText(right, 600)}
+
+                    <!-- ELECTRODO DERECHO -->
                     ${renderElectrode(right, 600, false)}
 
+                    <!-- ETIQUETAS ÁNODO/CÁTODO (Paso 1+) -->
                     ${step >= 1 ? `
                         <rect x="${isAnodeLeft ? 150 : 550}" y="340" width="100" height="30" rx="5" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
                         <text x="${isAnodeLeft ? 200 : 600}" y="360" text-anchor="middle" font-weight="bold" fill="#b91c1c">ANODE (-)</text>
+
                         <rect x="${!isAnodeLeft ? 150 : 550}" y="340" width="100" height="30" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
                         <text x="${!isAnodeLeft ? 200 : 600}" y="360" text-anchor="middle" font-weight="bold" fill="#1d4ed8">CATHODE (+)</text>
                     ` : ''}
 
+                    <!-- FLECHAS DE REACCIÓN (Paso 4+) -->
                     ${(() => {
                         if (step < 4) return '';
+                        
                         const renderArrows = (element, cx, isAnode, isLeftCell) => {
                             const arrowClass = isAnode ? 'reaction-arrow-red' : 'reaction-arrow-blue';
                             const markerId = isAnode ? 'arrowRed' : 'arrowBlue';
@@ -756,42 +851,58 @@
                             const dSign = isLeftCell ? 1 : -1;
                             
                             if (element.type === 'aqueous') {
+                                // Para elementos en disolución, flechas entre los dos iones y el electrodo de Pt
                                 if (isAnode) { 
+                                    // Oxidación: Red (der) -> Electrodo -> Ox (izq)
                                     html += `
                                         <path d="M ${cx + 40} 260 Q ${cx + 20} 245 ${cx + 15} 240" fill="none" stroke-width="2.5" class="${arrowClass}" marker-end="url(#${markerId})"/>
                                         <path d="M ${cx - 15} 240 Q ${cx - 20} 245 ${cx - 40} 260" fill="none" stroke-width="2.5" class="${arrowClass}" marker-end="url(#${markerId})"/>
                                     `;
                                 } else { 
+                                    // Reducción: Ox (izq) -> Electrodo -> Red (der)
                                     html += `
                                         <path d="M ${cx - 40} 260 Q ${cx - 20} 245 ${cx - 15} 240" fill="none" stroke-width="2.5" class="${arrowClass}" marker-end="url(#${markerId})"/>
                                         <path d="M ${cx + 15} 240 Q ${cx + 20} 245 ${cx + 40} 260" fill="none" stroke-width="2.5" class="${arrowClass}" marker-end="url(#${markerId})"/>
                                     `;
                                 }
                             } else if (element.type === 'gas') {
+                                // Determinar si la especie gaseosa (no iónica) es la oxidada o la reducida
                                 const isOxGas = !element.ox.includes('<sup');
+                                
+                                // Lógica dinámica de dirección de flecha para gases
                                 const arrowDown = isAnode ? !isOxGas : isOxGas;
+                                
                                 if (arrowDown) {
+                                    // Flecha baja: Del electrodo de Pt/gas hacia la disolución
                                     html += `<path d="M ${cx + dSign*12} 225 Q ${cx + dSign*35} 245 ${cx + dSign*15} 265" fill="none" stroke-width="2.5" class="${arrowClass}" marker-end="url(#${markerId})"/>`;
                                 } else {
+                                    // Flecha sube: De la disolución (ion) hacia el electrodo de Pt
                                     html += `<path d="M ${cx + dSign*15} 265 Q ${cx + dSign*35} 245 ${cx + dSign*12} 225" fill="none" stroke-width="2.5" class="${arrowClass}" marker-end="url(#${markerId})"/>`;
                                 }
                             } else {
+                                // Flecha genérica para electrodos sólidos
                                 if (isAnode) {
+                                    // Ánodo (oxidación): del metal sólido a la disolución (ion) con más curvatura
                                     html += `<path d="M ${cx + dSign*25} 210 Q ${cx + dSign*60} 245 ${cx + dSign*15} 260" fill="none" stroke-width="2.5" class="${arrowClass}" marker-end="url(#${markerId})"/>`;
                                 } else {
+                                    // Cátodo (reducción): de la disolución (ion) al metal sólido con más curvatura
                                     html += `<path d="M ${cx + dSign*15} 260 Q ${cx + dSign*60} 245 ${cx + dSign*25} 210" fill="none" stroke-width="2.5" class="${arrowClass}" marker-end="url(#${markerId})"/>`;
                                 }
                             }
+                            
                             html += `<text x="${cx}" y="390" text-anchor="middle" fill="${labelColor}" font-size="15" font-weight="bold">${labelText}</text>`;
                             return html;
                         };
+                        
                         return renderArrows(left, 200, isAnodeLeft, true) + renderArrows(right, 600, !isAnodeLeft, false);
                     })()}
                 </svg>
             `;
+
             document.getElementById('svg-container').innerHTML = html;
         }
 
+        // Arrancar la simulación
         window.onload = init;
     </script>
 </body>
